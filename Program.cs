@@ -1,6 +1,6 @@
 ﻿
 using System;
-using IO;
+using System.IO;
 
 // El array nuestros animales almacenará lo siguiente:
 string especiesDeAnimal = "";
@@ -28,34 +28,34 @@ for (int i = 0; i < cantidadMaximaMascotas; i++)
     switch (i)
     {
         case 0:
-            especiesDeAnimal = "dog";
-            animalID = "d1";
+            especiesDeAnimal = "perro";
+            animalID = "p1";
             edadAnimal = "2";
-            descipcionFisicaAnimal = "Tamaño medio. Color crema. Golden retriever hembra. Peso: aproximadamente 30kg. Domesticada.";
+            descripcionFisicaAnimal = "Tamaño medio. Color crema. Golden retriever hembra. Peso: aproximadamente 30kg. Domesticada.";
             descripcionPersonalidadAnimal = "Le encanta que le froten la barriga y le gusta perseguir su cola. da muchos besos.";
             nombreAnimal = "Lola";
             break;
         case 1:
-            especiesDeAnimal = "dog";
-            animalID = "d2";
+            especiesDeAnimal = "perro";
+            animalID = "p2";
             edadAnimal = "9";
-            descipcionFisicaAnimal = "Golden retriever grande. Macho de color marrón rojizo que pesa alrededor de 40kg. domesticado.";
+            descripcionFisicaAnimal = "Golden retriever grande. Macho de color marrón rojizo que pesa alrededor de 40kg. domesticado.";
             descripcionPersonalidadAnimal = "¡Le encanta que le froten las orejas cuando te saluda en la puerta o en cualquier momento! Le encanta inclinarse y dar abrazos de perrito.";
             nombreAnimal = "Loki";
             break;
         case 2:
-            especiesDeAnimal = "cat";
-            animalID = "c3";
+            especiesDeAnimal = "gato";
+            animalID = "g3";
             edadAnimal = "1";
-            descipcionFisicaAnimal = "Pequeña hembra blanca que pesa alrededor de kg. Entrenada para usar caja de arena.";
+            descripcionFisicaAnimal = "Pequeña hembra blanca que pesa alrededor de kg. Entrenada para usar caja de arena.";
             descripcionPersonalidadAnimal = "Amigable";
             nombreAnimal = "Perona";
             break;
         case 3:
-            especiesDeAnimal = "cat";
-            animalID = "c4";
+            especiesDeAnimal = "gato";
+            animalID = "g4";
             edadAnimal = "?";
-            descipcionFisicaAnimal = "";
+            descripcionFisicaAnimal = "";
             descripcionPersonalidadAnimal = "";
             nombreAnimal = "";
             break;
@@ -63,7 +63,7 @@ for (int i = 0; i < cantidadMaximaMascotas; i++)
             especiesDeAnimal = "";
             animalID = "";
             edadAnimal = "";
-            descipcionFisicaAnimal = "";
+            descripcionFisicaAnimal = "";
             descripcionPersonalidadAnimal = "";
             nombreAnimal = "";
             break;
@@ -84,6 +84,65 @@ for (int i = 0; i < cantidadMaximaMascotas; i++)
 // Muestre el menú de opciones superior:
 do
 {
-    
+    // Para limpiar la consola. Importantísimo.
+    Console.Clear();
+
+    Console.WriteLine("Bienvenidos a la aplicación \"Mascotas Felices\". Tus opciones son:");
+    Console.WriteLine(" 1. Mostrar información de todas nuestras mascotas actuales.");
+    Console.WriteLine(" 2. Añadir un nuevo amigo animal al array nuestrosAnimales.");
+    Console.WriteLine(" 3. Asegurarse que las edades y las descripciones físicas estén completas.");
+    Console.WriteLine(" 4. Asegurarse que los nombres y las descripciones de las personalidades estén completas.");
+    Console.WriteLine(" 5. Editar la edad de un animal");
+    Console.WriteLine(" 6. Editar la descripción de personalidad de un animal");
+    Console.WriteLine(" 7. Mostrar todos los gatos con un característica especificada");
+    Console.WriteLine(" 8. Mostrar todos los perros con un característica especificada");
+    Console.WriteLine();
+    Console.WriteLine("Ingresa el número que seleccionaste (o escribe Salir para salir del programa.)");
+
+    leerResultado = Console.ReadLine();
+    if (leerResultado != null)
+    {
+        seleccionDelMenu = leerResultado.ToLower();
+    }
+
+    // Utilizamos el switch-case la opción del menú seleccionada
+    switch (seleccionDelMenu)
+    {
+        case "1":
+            // Listar información de todas nuestras mascotas actuales
+            for (int i = 0; i < cantidadMaximaMascotas; i++)
+            {
+                if (nuestrosAnimales[i, 0] != "ID #: ")
+                {
+                    Console.WriteLine();
+                    for (int j = 0; j < 6; j++)
+                    {
+                        Console.WriteLine(nuestrosAnimales[i, j].ToString());
+                    }
+                }
+            }
+            Console.WriteLine("\n\rPresiona la tecla Enter para continuar.");
+            leerResultado = Console.ReadLine();
+            break;
+        case "2":
+            break;
+        case "3":
+            break;
+        case "4":
+            break;
+        case "5":
+            break;
+        case "6":
+            break;
+        case "7":
+            break;
+        case "8":
+            break;
+
+        default:
+            break;
+    }
+
+
 } while ( seleccionDelMenu != "salir" );
 
