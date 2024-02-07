@@ -125,18 +125,41 @@ do
             leerResultado = Console.ReadLine();
             break;
         case "2":
+            
+            Console.WriteLine("En construcción - Por favor, regresa el mes siguiente para ver progresos.");
+            Console.WriteLine("Presiona la tecla Enter para continuar.");
+            leerResultado = Console.ReadLine();
             break;
         case "3":
+            Console.WriteLine("En construcción - Por favor, regresa el mes siguiente para ver progresos.");
+            Console.WriteLine("Presiona la tecla Enter para continuar.");
+            leerResultado = Console.ReadLine();
             break;
         case "4":
+            Console.WriteLine("En construcción - Por favor, regresa el mes siguiente para ver progresos.");
+            Console.WriteLine("Presiona la tecla Enter para continuar.");
+            leerResultado = Console.ReadLine();
             break;
         case "5":
+            Console.WriteLine("En construcción - Por favor, regresa el mes siguiente para ver progresos.");
+            Console.WriteLine("Presiona la tecla Enter para continuar.");
+            leerResultado = Console.ReadLine();
             break;
         case "6":
+            Console.WriteLine("En construcción - Por favor, regresa el mes siguiente para ver progresos.");
+            Console.WriteLine("Presiona la tecla Enter para continuar.");
+            leerResultado = Console.ReadLine();
             break;
         case "7":
+            Console.WriteLine("En construcción - Por favor, regresa el mes siguiente para ver progresos.");
+            Console.WriteLine("Presiona la tecla Enter para continuar.");
+            leerResultado = Console.ReadLine();
             break;
         case "8":
+            // Muestra todos los perros con una característica especificada.
+            Console.WriteLine("En construcción - Por favor, regresa el mes siguiente para ver progresos.");
+            Console.WriteLine("Presiona la tecla Enter para continuar.");
+            leerResultado = Console.ReadLine();
             break;
 
         default:
