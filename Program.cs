@@ -125,8 +125,36 @@ do
             leerResultado = Console.ReadLine();
             break;
         case "2":
-            
-            Console.WriteLine("En construcción - Por favor, regresa el mes siguiente para ver progresos.");
+            /*
+            Añadir un nuevo amigo animal al array nuestrosAnimales
+            El array nuestrosAnimales contiene:
+                1. La especie (perro o gato). Campo requerido.
+                2. El número de ID. Por ejemplo, C17.
+                3. La edad de la mascota. Puede estar en blanco al ingresar por primera vez
+                4. El nombre de la mascota. Puede estar en blanco.
+                5. Una descripción de la apariencia física de la mascota. Puede estar en blanco.
+                6. Una descripción de la personalidad de la mascota. Puede estar en blanco.
+            */
+            otraMascota = "y";
+            contadorMascotas = 0;
+            for (int i = 0; i < cantidadMaximaMascotas; i++)
+            {
+                if (nuestrosAnimales[i, 0] != "ID #: ")
+                {
+                    contadorMascotas += 1;
+                }
+            }
+
+            if ( contadorMascotas < cantidadMaximaMascotas )
+            {
+                Console.WriteLine($"Actualmente tenemos {contadorMascotas} mascotas que necesitan hogar. Podemos manejar {(cantidadMaximaMascotas - contadorMascotas)} mascotas más.");
+            }
+
+            while ( otraMascota == "y" && contadorMascotas < cantidadMaximaMascotas )
+            {
+                // Obtenemos las especies (gato o perro). El string especiesDeAnimal es un campo requerido.
+                
+            }
             Console.WriteLine("Presiona la tecla Enter para continuar.");
             leerResultado = Console.ReadLine();
             break;
