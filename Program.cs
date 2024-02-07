@@ -153,10 +153,130 @@ do
             while ( otraMascota == "y" && contadorMascotas < cantidadMaximaMascotas )
             {
                 // Obtenemos las especies (gato o perro). El string especiesDeAnimal es un campo requerido.
-                
+                do
+                {
+                    Console.WriteLine("\n\rIngresa 'perro' o 'gato' para empezar un nuevo ingreso:");
+                    leerResultado = Console.ReadLine();
+                    if (leerResultado != null)
+                    {
+                        especiesDeAnimal = leerResultado.ToLower();
+                        if (especiesDeAnimal != "perro" && especiesDeAnimal != "gato")
+                        {
+                            entradaValida = false;
+                        }
+                        else
+                        {
+                            entradaValida = true;
+                        }
+                    }
+                } while ( entradaValida == false );
+
+                // build the animal the ID number - for example C1, C2, D3 (for Cat 1, Cat 2, Dog 3)
+                // construimos el número de ID del animal. Por ejemplo G1, G2, G3 (para Gato 1, Gato 2, Gato 3)
+                animalID = especiesDeAnimal.Substring(0, 1) + (contadorMascotas + 1).ToString();
+
+                // Obtenemos la edad de la mascota. Puede ser ? la primera vez que se ingresan los datos.
+                do
+                {
+                    Console.WriteLine("Ingrese la edad de la mascota, o ingrese ? si es desconocida. ");
+                    leerResultado = Console.ReadLine();
+                    if ( leerResultado != null )
+                    {
+                        edadAnimal = leerResultado;
+                        if (edadAnimal != "?")
+                        {
+                            entradaValida = int.TryParse(edadAnimal, out edadMascota);
+                        }
+                        else
+                        {
+                            entradaValida = true;
+                        }
+                    }
+                } while ( entradaValida == false );
+
+                // get a description of the pet's physical appearance - animalPhysicalDescription can be blank.
+                // Obtenemos una descripción de la apariencia física de la mascota. `descripcionFisicaAnimal` puede estar en blanco.
+                do
+                {
+                    Console.WriteLine("Ingrese una descripción física de la mascota (tamaño, color, género, peso, abandonada)");
+                    leerResultado = Console.ReadLine();
+                    if (leerResultado != null)
+                    {
+                        descripcionFisicaAnimal = leerResultado.ToLower();
+                        if (descripcionFisicaAnimal == "")
+                        {
+                            descripcionFisicaAnimal = "tbd";
+                        }
+                    }
+                } while ( entradaValida == false );
+
+                // Obtenemos una descripción de la personalidad. `descripcionPersonalidadAnimal` puede estar en blanco.
+                do
+                {
+                    Console.WriteLine("Ingrese una descripción de la personalidad de la mascota (gustos o disgustos, trucos, nivel de energía, etc.)");
+                    leerResultado = Console.ReadLine();
+                    if (leerResultado != null)
+                    {
+                        descripcionPersonalidadAnimal = leerResultado.ToLower();
+                        if (descripcionPersonalidadAnimal == "")
+                        {
+                            descripcionPersonalidadAnimal = "tbd";
+                        }
+                    }
+                } while ( entradaValida == false );
+
+                // Obtenemos el nombre de la mascota. `` puede estar en blanco.
+                do
+                {
+                    Console.WriteLine("Ingrese un nombre para la mascota.");
+                    leerResultado = Console.ReadLine();
+                    if (leerResultado != null)
+                    {
+                        nombreAnimal = leerResultado.ToLower();
+                        if (nombreAnimal == "")
+                        {
+                            nombreAnimal = "tbd";
+                        }
+                    }
+                } while ( entradaValida == false );
+
+                // Almacenamos la información de la mascota en el array `nuestrosAnimales`.
+                nuestrosAnimales[contadorMascotas, 0] = "ID #: " + animalID;
+                nuestrosAnimales[contadorMascotas, 1] = "Especies: " + especiesDeAnimal;
+                nuestrosAnimales[contadorMascotas, 2] = "Edad: " + edadAnimal;
+                nuestrosAnimales[contadorMascotas, 3] = "Nombre: " + nombreAnimal;
+                nuestrosAnimales[contadorMascotas, 4] = "Descripción física: " + descripcionFisicaAnimal;
+                nuestrosAnimales[contadorMascotas, 5] = "Personalidad: " + descripcionPersonalidadAnimal;
+
+                // Incrementamos contadorMascotas (el array tiene base-cero, así que incrementamos el contador después de agregar al array).
+                contadorMascotas = contadorMascotas + 1;
+
+                // verificamos el límite `cantidadMaximaMascotas`.
+                if (contadorMascotas < cantidadMaximaMascotas)
+                {
+                    // ¿Otra mascota?
+                    Console.WriteLine("¿Desea ingresar información para otra mascota? (y/n)");
+                    do
+                    {
+                        leerResultado = Console.ReadLine();
+                        if (leerResultado != null)
+                        {
+                            otraMascota = leerResultado.ToLower();
+                        }
+
+                    } while ( otraMascota != "y" && otraMascota != "n" );
+                }
+
+                // NOTA: El valor de `otraMascota` ("y" o "n") se evalúa en la expresión de la sentencia `while` en al principio del bucle `while`.
             }
-            Console.WriteLine("Presiona la tecla Enter para continuar.");
-            leerResultado = Console.ReadLine();
+            
+            if (contadorMascotas >= cantidadMaximaMascotas)
+            {
+                Console.WriteLine("Hemos alcanzado nuestro límite para la cantidad de mascotas que podemos cuidar.");
+                Console.WriteLine("Presiona la tecla Enter para continuar.");
+                leerResultado = Console.ReadLine();
+            }
+
             break;
         case "3":
             Console.WriteLine("En construcción - Por favor, regresa el mes siguiente para ver progresos.");
