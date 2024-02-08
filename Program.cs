@@ -350,8 +350,74 @@ do
             break;
 
         case "4":
-            Console.WriteLine("En construcción - Por favor, regresa el mes siguiente para ver progresos.");
-            Console.WriteLine("Presiona la tecla Enter para continuar.");
+            // Asegurarse que el nombre y las descripociones de personalidad de las mascotas estén compoletas.
+            for (int i = 0; i < cantidadMaximaMascotas; i++)
+            {
+                // Si tiene un id asignado pero no tiene nombre es porque la mascota existe pero tiene los datos (en este caso el nombre) incompletos.
+                if ( nuestrosAnimales[i, 3]  == "Nombre: " && nuestrosAnimales[i, 0] != "ID #: " )
+                {
+                    bool nombreValido = false;
+                    do
+                    {
+                        Console.WriteLine($"\n\rIngrese un nombre para {nuestrosAnimales[i, 0]}");
+                        leerResultado = Console.ReadLine();
+
+                        if ( leerResultado != null )
+                        {
+                            nombreAnimal = leerResultado.ToLower();
+                            if ( nombreAnimal != "" && nombreAnimal != "tbd" )
+                            {
+                                nuestrosAnimales[i, 3] = "Nombre: " + nombreAnimal;
+                                nombreValido = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Ingrese un nombre válido para la mascota!");
+                                nombreValido = false;
+                            }
+
+                        }
+                    } while (nombreValido == false);
+
+                // Si tiene un id asignado pero no tiene descipción física es porque la mascota existe pero tiene los datos (en este caso la descripción física) incompletos.
+                }
+                
+                if (
+                    (
+                        nuestrosAnimales[i, 5]  == "Personalidad: tbd" ||
+                        nuestrosAnimales[i, 5]  == "Personalidad: "
+                    ) &&
+                    nuestrosAnimales[i, 0] != "ID #: "
+                )
+                {
+
+                    do
+                    {
+                        Console.WriteLine($"\n\rIngrese una 'Descripción de personalidad' para {nuestrosAnimales[i, 0]} (gustos o cosas que no le gustan, trucos, nivel de energía, etc.)");
+                        leerResultado = Console.ReadLine();
+
+                        if ( leerResultado != null )
+                        {
+                            descripcionPersonalidadAnimal = leerResultado.ToLower();
+                            if (descripcionPersonalidadAnimal != "" && descripcionPersonalidadAnimal != "tbd")
+                            {
+                                nuestrosAnimales[i, 5] = "Personalidad: " + descripcionPersonalidadAnimal;
+                                entradaValida = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Ups... Parece que hay un error. Ingrese una 'Descripción de personalidad' para {nuestrosAnimales[i, 0]} (gustos o cosas que no le gustan, trucos, nivel de energía, etc.)");
+                                entradaValida = false;
+                            }
+
+                        }
+                    } while (entradaValida == false);
+
+                }
+
+            }
+            Console.WriteLine("Los campos para el nombre y la descripción física de todos nuestros animales están completos.");
+            Console.WriteLine("Presione la tecla Enter para continuar.");
             leerResultado = Console.ReadLine();
             break;
         case "5":

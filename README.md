@@ -22,12 +22,11 @@
 > - Mostrar un menú de opciones para acceder a las funcionalidades principales de la aplicación.
 > - Las funcionalidades principales permiten realizar las siguientes tareas:
 >   - Listar la información de mascotas para todos los animales en el array `nuestrosAnimales`.
->   - Add new animals to the `nuestrosAnimales` array. The following conditions apply:
 >   - Agregar nuevos animales el array `nuestrosAnimales`. Se apican las siguientes condiciones:
->           - Las especies de las mascotas (perro o gato) se ingresan cuando una nuevo animal se agrega al array `nuestrosAnimales`.
->           - Un ID de masgota se genera automáticamente cuando un nuevo animal se agrega al array `nuestrosAnimales`.
->           - Algunas características físicas para una mascota podrían ser desconocidas hasta el exámen de la veterinaria. Por ejemplo: edad, raza, estado (castrado/esterilizado), etc..
->           - El nombre y la personalidad de un animal podrían ser desconocidos cuando una mascota ingresa por primera vez.
+>     - Las especies de las mascotas (perro o gato) se ingresan cuando una nuevo animal se agrega al array `nuestrosAnimales`.
+>     - Un ID de mascota se genera automáticamente cuando un nuevo animal se agrega al array `nuestrosAnimales`.
+>     - Algunas características físicas para una mascota podrían ser desconocidas hasta el exámen de la veterinaria. Por ejemplo: edad, raza, estado (castrado/esterilizado), etc.
+>     - El nombre y la personalidad de un animal podrían ser desconocidos cuando una mascota ingresa por primera vez.
 >   - Asegurarse que la edad y las decripciones físicas del animal estén completas. Esto podría ser requerido después de la revisión en la veterinaria.
 >   - Asegurarse que el nombre y las descripciones de personalidad de los animales estén completas (esta acción puede suceder después de que el equipo llegue a conocer a la mascota).
 >   - Editar la edad de un animal (si la fecha de cumpleaños se conoce y la mascota cumple años mientras está bajo nuestro cuidado).
@@ -53,10 +52,10 @@
 > - The main features enable the following tasks:
 >   - List the pet information for all animals in the `nuestrosAnimales` array.
 >   - Add new animals to the `nuestrosAnimales` array. The following conditions apply:
->           - The pet species (dog or cat) are entered when a new animal is added to the `nuestrosAnimales` array.
->           - A pet ID is programmatically generated when a new animal is added to the `nuestrosAnimales` array.
->           - Some physical characteristics for a pet may be unknown until a veterinarian's examination. For example: age, breed, and neutered/spayed status.
->           - An animal's nickname and personality may be unknown when a pet first arrives.
+>     - The pet species (dog or cat) are entered when a new animal is added to the `nuestrosAnimales` array.
+>     - A pet ID is programmatically generated when a new animal is added to the `nuestrosAnimales` array.
+>     - Some physical characteristics for a pet may be unknown until a veterinarian's examination. For example: age, breed, and neutered/spayed status.
+>     - An animal's nickname and personality may be unknown when a pet first arrives.
 >   - Ensure animal ages and physical descriptions are complete. This may be required after a veterinarian's examination.
 >   - Ensure animal nicknames and personality descriptions are complete (this action can occur after the team gets to know a pet).
 >   - Edit an animal’s age (if a pet's birth date is known and the pet has a birthday while in our care).
