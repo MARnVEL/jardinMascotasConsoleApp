@@ -171,7 +171,6 @@ do
                     }
                 } while ( entradaValida == false );
 
-                // build the animal the ID number - for example C1, C2, D3 (for Cat 1, Cat 2, Dog 3)
                 // construimos el número de ID del animal. Por ejemplo G1, G2, G3 (para Gato 1, Gato 2, Gato 3)
                 animalID = especiesDeAnimal.Substring(0, 1) + (contadorMascotas + 1).ToString();
 
@@ -194,7 +193,6 @@ do
                     }
                 } while ( entradaValida == false );
 
-                // get a description of the pet's physical appearance - animalPhysicalDescription can be blank.
                 // Obtenemos una descripción de la apariencia física de la mascota. `descripcionFisicaAnimal` puede estar en blanco.
                 do
                 {
@@ -225,7 +223,7 @@ do
                     }
                 } while ( entradaValida == false );
 
-                // Obtenemos el nombre de la mascota. `` puede estar en blanco.
+                // Obtenemos el nombre de la mascota. `nombreAnimal`. Puede estar en blanco.
                 do
                 {
                     Console.WriteLine("Ingrese un nombre para la mascota.");
@@ -279,10 +277,78 @@ do
 
             break;
         case "3":
-            Console.WriteLine("En construcción - Por favor, regresa el mes siguiente para ver progresos.");
+            // Asegurarse de que la edad y las descripciones físicas están completas.
+            for (int i = 0; i < cantidadMaximaMascotas; i++)
+            {
+                // Si tiene un id asignado pero no tiene edad es porque la mascota existe pero tiene los datos (en este caso la edad) incompletos.
+                if ( nuestrosAnimales[i, 2]  == "Edad: ?" && nuestrosAnimales[i, 0] != "ID #: " )
+                {
+                    bool edadValida = false;
+                    do
+                    {
+                        Console.WriteLine($"\n\rIngrese una edad para {nuestrosAnimales[i, 0]}");
+                        leerResultado = Console.ReadLine();
+
+                        if ( leerResultado != null )
+                        {
+                            edadAnimal = leerResultado;
+                            if (edadAnimal != "")
+                            {
+                                edadValida = int.TryParse(edadAnimal, out edadMascota);
+                                nuestrosAnimales[i, 2] = "Edad: " + edadMascota.ToString();
+                            }
+                            else
+                            {
+                                Console.WriteLine("Ingrese un número válido!");
+                                edadValida = false;
+                            }
+
+                        }
+                    } while (edadValida == false);
+
+                }
+                // Si tiene un id asignado pero no tiene descipción física es porque la mascota existe pero tiene los datos (en este caso la descripción física) incompletos.
+
+                
+                if (
+                    (
+                        nuestrosAnimales[i, 4]  == "Descripción física: tbd" ||
+                        nuestrosAnimales[i, 4]  == "Descripción física: "
+                    ) &&
+                    nuestrosAnimales[i, 0] != "ID #: "
+                )
+                {
+
+                    do
+                    {
+                        Console.WriteLine($"\n\rIngrese una 'Descripción física' para {nuestrosAnimales[i, 0]} (tamaño, color, peso, abandonada, etc.)");
+                        leerResultado = Console.ReadLine();
+
+                        if ( leerResultado != null )
+                        {
+                            descripcionFisicaAnimal = leerResultado.ToLower();
+                            if ( descripcionFisicaAnimal != "" && descripcionFisicaAnimal != "tbd" )
+                            {
+                                nuestrosAnimales[i, 4] = "Descripcion física: " + descripcionFisicaAnimal;
+                                entradaValida = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine($"\n\rIngrese una 'Descripción física' válida para {nuestrosAnimales[i, 0]} (tamaño, color, peso, abandonada, etc.)");
+                                entradaValida = false;
+                            }
+
+                        }
+                    } while ( entradaValida == false );
+
+                }
+
+            }
+            Console.WriteLine("Los campos para la edad y la descripcion física est+an completos para todos nuestros amigos.");
             Console.WriteLine("Presiona la tecla Enter para continuar.");
             leerResultado = Console.ReadLine();
             break;
+
         case "4":
             Console.WriteLine("En construcción - Por favor, regresa el mes siguiente para ver progresos.");
             Console.WriteLine("Presiona la tecla Enter para continuar.");
