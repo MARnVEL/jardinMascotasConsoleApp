@@ -9,6 +9,7 @@ string edadAnimal = "";
 string descripcionFisicaAnimal = "";
 string descripcionPersonalidadAnimal = "";
 string nombreAnimal = "";
+string donacionSugerida = "";
 
 // Variables que soportan datos de entrada:
 int cantidadMaximaMascotas = 8;
@@ -18,9 +19,10 @@ int contadorMascotas = 0;
 string otraMascota = "y";
 bool entradaValida = false;
 int edadMascota = 0;
+decimal decimalDonacion = 0.00m;
 
 // Array utilizado para almacenar datos en tiempo de ejecución. No hay persistencia de datos
-string[,] nuestrosAnimales = new string[cantidadMaximaMascotas, 6];
+string[,] nuestrosAnimales = new string[cantidadMaximaMascotas, 7];
 
 // Creamos algunos datos iniciales para el array nuestrosAnimales
 for (int i = 0; i < cantidadMaximaMascotas; i++)
@@ -34,7 +36,9 @@ for (int i = 0; i < cantidadMaximaMascotas; i++)
             descripcionFisicaAnimal = "Tamaño medio. Color crema. Golden retriever hembra. Peso: aproximadamente 30kg. Domesticada.";
             descripcionPersonalidadAnimal = "Le encanta que le froten la barriga y le gusta perseguir su cola. da muchos besos.";
             nombreAnimal = "Lola";
+            donacionSugerida = "85,00";
             break;
+
         case 1:
             especiesDeAnimal = "perro";
             animalID = "p2";
@@ -42,7 +46,9 @@ for (int i = 0; i < cantidadMaximaMascotas; i++)
             descripcionFisicaAnimal = "Golden retriever grande. Macho de color marrón rojizo que pesa alrededor de 40kg. domesticado.";
             descripcionPersonalidadAnimal = "¡Le encanta que le froten las orejas cuando te saluda en la puerta o en cualquier momento! Le encanta inclinarse y dar abrazos de perrito.";
             nombreAnimal = "Loki";
+            donacionSugerida = "49,99";
             break;
+
         case 2:
             especiesDeAnimal = "gato";
             animalID = "g3";
@@ -50,7 +56,9 @@ for (int i = 0; i < cantidadMaximaMascotas; i++)
             descripcionFisicaAnimal = "Pequeña hembra blanca que pesa alrededor de kg. Entrenada para usar caja de arena.";
             descripcionPersonalidadAnimal = "Amigable";
             nombreAnimal = "Perona";
+            donacionSugerida = "40,00";
             break;
+
         case 3:
             especiesDeAnimal = "gato";
             animalID = "g4";
@@ -58,7 +66,9 @@ for (int i = 0; i < cantidadMaximaMascotas; i++)
             descripcionFisicaAnimal = "";
             descripcionPersonalidadAnimal = "";
             nombreAnimal = "";
+            donacionSugerida = "";
             break;
+
         default:
             especiesDeAnimal = "";
             animalID = "";
@@ -66,6 +76,7 @@ for (int i = 0; i < cantidadMaximaMascotas; i++)
             descripcionFisicaAnimal = "";
             descripcionPersonalidadAnimal = "";
             nombreAnimal = "";
+            donacionSugerida = "";
             break;
     }
 
@@ -79,6 +90,11 @@ for (int i = 0; i < cantidadMaximaMascotas; i++)
     nuestrosAnimales[i, 3] = "Nombre: " + nombreAnimal;
     nuestrosAnimales[i, 4] = "Descripción física: " + descripcionFisicaAnimal;
     nuestrosAnimales[i, 5] = "Personalidad: " + descripcionPersonalidadAnimal;
+
+    if (!decimal.TryParse(donacionSugerida, out decimalDonacion)){
+        decimalDonacion = 45.00m; // si donacionSugerida NO es un número, el valor por defecto será 45.00
+    }
+    nuestrosAnimales[i, 6] = $"Donación Sugerida: {decimalDonacion:C2}";
 }
 
 // Muestre el menú de opciones superior:
@@ -89,7 +105,7 @@ do
 
     Console.WriteLine("Bienvenidos a la aplicación \"Mascotas Felices\". Tus opciones son:");
     Console.WriteLine(" 1. Mostrar información de todas nuestras mascotas actuales.");
-    Console.WriteLine(" 2. Añadir un nuevo amigo animal al array nuestrosAnimales.");
+    Console.WriteLine(" 2. Añadir un nuevo animal amigo al array nuestrosAnimales.");
     Console.WriteLine(" 3. Asegurarse que las edades y las descripciones físicas estén completas.");
     Console.WriteLine(" 4. Asegurarse que los nombres y las descripciones de las personalidades estén completas.");
     Console.WriteLine(" 5. Editar la edad de un animal");
@@ -105,7 +121,7 @@ do
         seleccionDelMenu = leerResultado.ToLower();
     }
 
-    // Utilizamos el switch-case la opción del menú seleccionada
+    // Utilizamos el switch-case para procesar la opción del menú seleccionada
     switch (seleccionDelMenu)
     {
         case "1":
@@ -115,7 +131,7 @@ do
                 if (nuestrosAnimales[i, 0] != "ID #: ")
                 {
                     Console.WriteLine();
-                    for (int j = 0; j < 6; j++)
+                    for (int j = 0; j < 7; j++)
                     {
                         Console.WriteLine(nuestrosAnimales[i, j].ToString());
                     }
@@ -124,9 +140,10 @@ do
             Console.WriteLine("\n\rPresiona la tecla Enter para continuar.");
             leerResultado = Console.ReadLine();
             break;
+
         case "2":
             /*
-            Añadir un nuevo amigo animal al array nuestrosAnimales
+            Añadir un nuevo animal amigo al array nuestrosAnimales
             El array nuestrosAnimales contiene:
                 1. La especie (perro o gato). Campo requerido.
                 2. El número de ID. Por ejemplo, C17.
@@ -134,6 +151,7 @@ do
                 4. El nombre de la mascota. Puede estar en blanco.
                 5. Una descripción de la apariencia física de la mascota. Puede estar en blanco.
                 6. Una descripción de la personalidad de la mascota. Puede estar en blanco.
+                7. Un monto sugerido para donar para cuidados de la mascota específica.
             */
             otraMascota = "y";
             contadorMascotas = 0;
@@ -173,6 +191,7 @@ do
 
                 // construimos el número de ID del animal. Por ejemplo G1, G2, G3 (para Gato 1, Gato 2, Gato 3)
                 animalID = especiesDeAnimal.Substring(0, 1) + (contadorMascotas + 1).ToString();
+                // animalID = string.Concat(especiesDeAnimal.AsSpan(0, 1), (contadorMascotas + 1).ToString());
 
                 // Obtenemos la edad de la mascota. Puede ser ? la primera vez que se ingresan los datos.
                 do
@@ -238,6 +257,22 @@ do
                     }
                 } while ( entradaValida == false );
 
+                // Obtenemos la donación sugerida para la mascota. `donacionSugerida`. Puede estar en blanco.
+                do
+                {
+                    Console.WriteLine("Ingrese una donación sugerida para la mascota.");
+                    leerResultado = Console.ReadLine();
+                    if (leerResultado != null)
+                    {
+                        donacionSugerida = leerResultado.ToLower();
+                        if (donacionSugerida == "")
+                        {
+                            donacionSugerida = "";
+                        }
+                    }
+
+                } while ( entradaValida == false );
+
                 // Almacenamos la información de la mascota en el array `nuestrosAnimales`.
                 nuestrosAnimales[contadorMascotas, 0] = "ID #: " + animalID;
                 nuestrosAnimales[contadorMascotas, 1] = "Especies: " + especiesDeAnimal;
@@ -245,6 +280,11 @@ do
                 nuestrosAnimales[contadorMascotas, 3] = "Nombre: " + nombreAnimal;
                 nuestrosAnimales[contadorMascotas, 4] = "Descripción física: " + descripcionFisicaAnimal;
                 nuestrosAnimales[contadorMascotas, 5] = "Personalidad: " + descripcionPersonalidadAnimal;
+
+                if (!decimal.TryParse(donacionSugerida, out decimalDonacion)){
+                    decimalDonacion = 45.00m; // si donacionSugerida NO es un número, el valor por defecto será 45.00
+                }
+                nuestrosAnimales[contadorMascotas, 6] = $"Donación Sugerida: {decimalDonacion:C2}";
 
                 // Incrementamos contadorMascotas (el array tiene base-cero, así que incrementamos el contador después de agregar al array).
                 contadorMascotas = contadorMascotas + 1;
