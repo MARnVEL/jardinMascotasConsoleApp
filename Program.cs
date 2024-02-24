@@ -63,7 +63,7 @@ for (int i = 0; i < cantidadMaximaMascotas; i++)
             especiesDeAnimal = "gato";
             animalID = "g4";
             edadAnimal = "?";
-            descripcionFisicaAnimal = "";
+            descripcionFisicaAnimal = "Gata tricolor";
             descripcionPersonalidadAnimal = "";
             nombreAnimal = "";
             donacionSugerida = "";
@@ -108,10 +108,10 @@ do
     Console.WriteLine(" 2. Añadir un nuevo animal amigo al array nuestrosAnimales.");
     Console.WriteLine(" 3. Asegurarse que las edades y las descripciones físicas estén completas.");
     Console.WriteLine(" 4. Asegurarse que los nombres y las descripciones de las personalidades estén completas.");
-    Console.WriteLine(" 5. Editar la edad de un animal");
-    Console.WriteLine(" 6. Editar la descripción de personalidad de un animal");
-    Console.WriteLine(" 7. Mostrar todos los gatos con un característica especificada");
-    Console.WriteLine(" 8. Mostrar todos los perros con un característica especificada");
+    Console.WriteLine(" 5. Editar la edad de un animal.");
+    Console.WriteLine(" 6. Editar la descripción de personalidad de un animal.");
+    Console.WriteLine(" 7. Mostrar todos los gatos con características especificadas.");
+    Console.WriteLine(" 8. Mostrar todos los perros con características especificadas.");
     Console.WriteLine();
     Console.WriteLine("Ingresa el número que seleccionaste (o escribe Salir para salir del programa.)");
 
@@ -287,7 +287,7 @@ do
                 nuestrosAnimales[contadorMascotas, 6] = $"Donación Sugerida: {decimalDonacion:C2}";
 
                 // Incrementamos contadorMascotas (el array tiene base-cero, así que incrementamos el contador después de agregar al array).
-                contadorMascotas = contadorMascotas + 1;
+                contadorMascotas++;
 
                 // verificamos el límite `cantidadMaximaMascotas`.
                 if (contadorMascotas < cantidadMaximaMascotas)
@@ -316,6 +316,7 @@ do
             }
 
             break;
+
         case "3":
             // Asegurarse de que la edad y las descripciones físicas están completas.
             for (int i = 0; i < cantidadMaximaMascotas; i++)
@@ -460,23 +461,133 @@ do
             Console.WriteLine("Presione la tecla Enter para continuar.");
             leerResultado = Console.ReadLine();
             break;
+
         case "5":
+            // Editar la edad de un animal
             Console.WriteLine("En construcción - Por favor, regresa el mes siguiente para ver progresos.");
             Console.WriteLine("Presiona la tecla Enter para continuar.");
             leerResultado = Console.ReadLine();
             break;
+
         case "6":
+            // Editar la descripción de personalidad de un animal
             Console.WriteLine("En construcción - Por favor, regresa el mes siguiente para ver progresos.");
             Console.WriteLine("Presiona la tecla Enter para continuar.");
             leerResultado = Console.ReadLine();
             break;
+
         case "7":
-            Console.WriteLine("En construcción - Por favor, regresa el mes siguiente para ver progresos.");
+            // Mostrar todos los gatos con características especificadas.
+            string caracteristicasGato = "";
+
+            while (caracteristicasGato == "")
+            {
+                Console.WriteLine($"\r\nIngrese las características de los gatos que desea buscar separadas por comas: ");
+                leerResultado = Console.ReadLine();
+                if (leerResultado != null)
+                {
+                    caracteristicasGato = leerResultado.ToLower().Trim();
+                    // Console.WriteLine($"El caracteristicasGato despues del tolower y trim: {caracteristicasGato}");
+                    Console.WriteLine();
+                }
+            }
+
+            /*Almacenamos los términos de búsqueda que ingresó el usuario en prograas más amplios.*/
+            string [] gatosTerminosBusquedaArr = caracteristicasGato.Split(",");
+
+            for(int i = 0; i < gatosTerminosBusquedaArr.Length; i++)
+            {
+                gatosTerminosBusquedaArr[i] = gatosTerminosBusquedaArr[i].Trim();
+            }
+
+            // Odenamos alfabéticamente el array
+            Array.Sort(gatosTerminosBusquedaArr);
+
+            bool coincidenciaEnAlgunGato = false;
+            string descripcionGato = "";
+
+            string[] iconosDeBusqueda = { " |", " /", "--", " \\", " *" };
+
+            /*
+            Iteramos sobre el array `nuestrosAnimales` para buscar coincidencias con las mascotas
+            */
+            for (int i = 0; i < cantidadMaximaMascotas; i++)
+            {
+                if (nuestrosAnimales[i,1].Contains("gato"))
+                {
+                    descripcionGato = $"{nuestrosAnimales[i, 4]} \r\n {nuestrosAnimales[i,5]}";
+
+                    /*
+                    Ahora buscaremos todos los términos q ingresó el usuario en la decripción de cada gato.
+                    Si hay al menos un término en la descripción del gato actual q estamos analizando nuestra
+                    variable `coincidenciaGatoActual` será `true`.
+                    */
+                    bool coincidenciaGatoActual = false;
+
+                    for (int k = 0; k < gatosTerminosBusquedaArr.Length; k++)
+                    {
+                        /*
+                        ! Recién en este punto analizamos y tratamos cada término q ingresó el usuario.
+                        * Solo buscamos los términos que son válidos.
+                        */
+                        if (gatosTerminosBusquedaArr[k] != null && (gatosTerminosBusquedaArr[k].Trim() != ""))
+                        {
+
+                            // Console.WriteLine($"El término de búsqueda {k}: {gatosTerminosBusquedaArr[k]}");
+                            /*
+                            Código para mostrar la animación de búsqueda
+                            */
+                            for (int j = 2; j > -1 ; j--)
+                            {
+                                foreach (string icono in iconosDeBusqueda)
+                                {
+                                    Console.Write($"\rbuscando en nuestro gato \"{nuestrosAnimales[i, 3]}\" el término de búsqueda: {gatosTerminosBusquedaArr[k].Trim()} {icono}");
+                                    Thread.Sleep(100);
+                                }
+                                
+                                Console.Write($"\r{new String(' ', Console.BufferWidth)}");
+                            }
+
+                            /*
+                            Nos fijamos si la decripción del gato que estamos analizando contiene el término de búsqueda en la posición "k" del array `gatosTerminosBusquedaArr`.
+                            */
+                            if(
+                                descripcionGato.Contains($" {gatosTerminosBusquedaArr[k]} ") ||
+                                descripcionGato.Contains($"{gatosTerminosBusquedaArr[k]} ") ||
+                                descripcionGato.Contains($" {gatosTerminosBusquedaArr[k]}") ||
+                                descripcionGato.Contains($"{gatosTerminosBusquedaArr[k]}")
+                            )
+                            {
+                                coincidenciaGatoActual = true;
+                                coincidenciaEnAlgunGato = true;
+                                Console.WriteLine($"\nNuestro gato {nuestrosAnimales[i, 3]} es una coincidencia para tu búsqueda de: {gatosTerminosBusquedaArr[k].Trim()}!");
+                            }
+                        }
+                    }
+
+                    /*
+                    Si "este gato" es una coincidencia, se escribirá un mensaje de coincidencia
+                    + "la descripción del gato".
+                    */
+                    if (coincidenciaGatoActual)
+                    {
+                        Console.WriteLine($"\r{nuestrosAnimales[i, 3]} ({nuestrosAnimales[i, 0]})\n{descripcionGato}\n");
+                    }
+
+                }
+            }
+
+            if (!coincidenciaEnAlgunGato)
+            {
+                Console.WriteLine($"Ninguno de nuestros gatos poseen coincidencias para: {caracteristicasGato}");
+            }
+
             Console.WriteLine("Presiona la tecla Enter para continuar.");
             leerResultado = Console.ReadLine();
             break;
+
         case "8":
-            // Muestra todos los perros con una característica especificada.
+            // Mostrar todos los perros con características especificadas.
             Console.WriteLine("En construcción - Por favor, regresa el mes siguiente para ver progresos.");
             Console.WriteLine("Presiona la tecla Enter para continuar.");
             leerResultado = Console.ReadLine();
