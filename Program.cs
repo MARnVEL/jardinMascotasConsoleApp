@@ -588,7 +588,110 @@ do
 
         case "8":
             // Mostrar todos los perros con características especificadas.
-            Console.WriteLine("En construcción - Por favor, regresa el mes siguiente para ver progresos.");
+            string caracteristicasPerro = "";
+
+            while (caracteristicasPerro == "")
+            {
+                Console.WriteLine($"\r\nIngrese las características de los perros que desea buscar separadas por comas: ");
+                leerResultado = Console.ReadLine();
+                if (leerResultado != null)
+                {
+                    caracteristicasPerro = leerResultado.ToLower().Trim();
+                    // Console.WriteLine($"El caracteristicasPerro despues del tolower y trim: {caracteristicasPerro}");
+                    Console.WriteLine();
+                }
+            }
+
+            /*Almacenamos los términos de búsqueda que ingresó el usuario.*/
+            string [] perrosTerminosBusquedaArr = caracteristicasPerro.Split(",");
+
+            for(int i = 0; i < perrosTerminosBusquedaArr.Length; i++)
+            {
+                perrosTerminosBusquedaArr[i] = perrosTerminosBusquedaArr[i].Trim();
+            }
+
+            // Odenamos alfabéticamente el array
+            Array.Sort(perrosTerminosBusquedaArr);
+
+            bool coincidenciaEnAlgunPerro = false;
+            string descripcionPerro = "";
+
+            string[] iconosDeBusqueda2 = { " |", " /", "--", " \\", " *" };
+
+            /*
+            Iteramos sobre el array `nuestrosAnimales` para buscar coincidencias con las mascotas
+            */
+            for (int i = 0; i < cantidadMaximaMascotas; i++)
+            {
+                if (nuestrosAnimales[i,1].Contains("perro"))
+                {
+                    descripcionPerro = $"{nuestrosAnimales[i, 4]} \r\n {nuestrosAnimales[i,5]}";
+
+                    /*
+                    Ahora buscaremos todos los términos q ingresó el usuario en la decripción de cada perro.
+                    Si hay al menos un término en la descripción del perro actual q estamos analizando nuestra
+                    variable `coincidenciaGatoActual` será `true`.
+                    */
+                    bool coincidenciaPerroActual = false;
+
+                    for (int k = 0; k < perrosTerminosBusquedaArr.Length; k++)
+                    {
+                        /*
+                        ! Recién en este punto analizamos y tratamos cada término q ingresó el usuario.
+                        * Solo buscamos los términos que son válidos.
+                        */
+                        if (perrosTerminosBusquedaArr[k] != null && (perrosTerminosBusquedaArr[k].Trim() != ""))
+                        {
+
+                            // Console.WriteLine($"El término de búsqueda {k}: {perrosTerminosBusquedaArr[k]}");
+                            /*
+                            Código para mostrar la animación de búsqueda
+                            */
+                            for (int j = 2; j > -1 ; j--)
+                            {
+                                foreach (string icono in iconosDeBusqueda2)
+                                {
+                                    Console.Write($"\rbuscando en nuestro perro \"{nuestrosAnimales[i, 3]}\" el término de búsqueda: {perrosTerminosBusquedaArr[k].Trim()} {icono}");
+                                    Thread.Sleep(100);
+                                }
+                                
+                                Console.Write($"\r{new String(' ', Console.BufferWidth)}");
+                            }
+
+                            /*
+                            Nos fijamos si la decripción del perro que estamos analizando contiene el término de búsqueda en la posición "k" del array `perrosTerminosBusquedaArr`.
+                            */
+                            if(
+                                descripcionPerro.Contains($" {perrosTerminosBusquedaArr[k]} ") ||
+                                descripcionPerro.Contains($"{perrosTerminosBusquedaArr[k]} ") ||
+                                descripcionPerro.Contains($" {perrosTerminosBusquedaArr[k]}") ||
+                                descripcionPerro.Contains($"{perrosTerminosBusquedaArr[k]}")
+                            )
+                            {
+                                coincidenciaPerroActual = true;
+                                coincidenciaEnAlgunPerro = true;
+                                Console.WriteLine($"\nNuestro perro {nuestrosAnimales[i, 3]} es una coincidencia para tu búsqueda de: {perrosTerminosBusquedaArr[k].Trim()}!");
+                            }
+                        }
+                    }
+
+                    /*
+                    Si "este perro" es una coincidencia, se escribirá un mensaje de coincidencia
+                    + "la descripción del perro".
+                    */
+                    if (coincidenciaPerroActual)
+                    {
+                        Console.WriteLine($"\r{nuestrosAnimales[i, 3]} ({nuestrosAnimales[i, 0]})\n{descripcionPerro}\n");
+                    }
+
+                }
+            }
+
+            if (!coincidenciaEnAlgunPerro)
+            {
+                Console.WriteLine($"Ninguno de nuestros perros poseen coincidencias para: {caracteristicasPerro}");
+            }
+
             Console.WriteLine("Presiona la tecla Enter para continuar.");
             leerResultado = Console.ReadLine();
             break;
@@ -596,7 +699,6 @@ do
         default:
             break;
     }
-
 
 } while ( seleccionDelMenu != "salir" );
 

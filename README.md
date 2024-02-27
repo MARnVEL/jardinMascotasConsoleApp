@@ -18,6 +18,7 @@
 >   - Una descripción de las características/condiciones físicas de la mascota.
 >   - Una descripción de la personalidad de la mascota.
 >   - El nombre de la mascota.
+>   - Un monto de donación sugerida para el cuidado de una mascota en específico.
 > - Existe un conjunto de datos de ejemplo que representa perros y gatos que están actualmente en nuestro cuidado.
 > - Mostrar un menú de opciones para acceder a las funcionalidades principales de la aplicación.
 > - Las funcionalidades principales permiten realizar las siguientes tareas:
@@ -63,7 +64,6 @@
 >   - Display all cats that meet user specified physical characteristics.
 >   - Display all dogs that meet user specified physical characteristics.
 
-
 ## Tecnologías utilizadas:
 <div align="center" style="display: flex">
       <span>
@@ -80,7 +80,7 @@
 
 ## Requerimientos
 
-- Tener intalado el sdk dotNET 8 (https://dotnet.microsoft.com/en-us/download).
+- Tener intalado el sdk **dotNET 8** (<https://dotnet.microsoft.com/en-us/download>).
 - Tener instalado git.
 
 ## Usos
